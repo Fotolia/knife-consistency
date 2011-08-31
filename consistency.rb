@@ -3,7 +3,7 @@ require 'chef/knife'
 module Fotolia
   class Consistency < Chef::Knife
 
-    banner "knife consistency [latest|local] [ENVIRONMENT]"
+    banner "knife consistency [latest ENVIRONMENT|local]"
 
     deps do
       require 'chef/knife/search'
@@ -13,7 +13,7 @@ module Fotolia
 
     def run
       if name_args.count < 1 then
-        ui.error "Usage : knife consistency [latest|local] [ENVIRONMENT if latest]"
+        ui.error "Usage : knife consistency [latest ENVIRONMENT|local]"
         exit 1
       end
 
