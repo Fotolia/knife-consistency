@@ -24,7 +24,11 @@ cookbook "resolvconf" has no local candidate version
 cookbook "activemq" is not up to date. latest is 0.0.2, local version is 0.0.1
 </pre>
 
-License : WTFPL
+License
+=======
+WTFPL : http://sam.zoy.org/wtfpl/
 
-Author : Nicolas Szalay < nico |at| rottenbytes |meh| info >
+Author
+======
+Nicolas Szalay < nico |at| rottenbytes |meh| info >
 
