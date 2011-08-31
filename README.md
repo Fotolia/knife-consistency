@@ -26,7 +26,7 @@ cookbook "activemq" is not up to date. latest is 0.0.2, local version is 0.0.1
 
 License
 =======
-WTFPL : http://sam.zoy.org/wtfpl/
+3 clauses BSD
 
 Author
 ======
