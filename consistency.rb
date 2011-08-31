@@ -91,13 +91,21 @@ module Fotolia
         Chef::Config.from_file(File.join(ENV['HOME'], '.chef', 'knife.rb'))
       end
 
-      Dir.glob("#{Chef::Config.cookbook_path}/*").each do |cookbook|
-        md = Chef::Cookbook::Metadata.new
+      if Chef::Config.cookbook_path.is_a?(String)
+        config_cookbook_path = [ Chef::Config.cookbook_path ]
+      else
+        config_cookbook_path = Chef::Config.cookbook_path
+      end
 
-        cb_name = File.basename(cookbook)
-        md.name(cb_name)
-        md.from_file("#{cookbook}/metadata.rb")
-        cbs[cb_name] = md.version
+      config_cookbook_path.each do |cookbook_path|
+        Dir.glob("#{cookbook_path}/*").each do |cookbook|
+          md = Chef::Cookbook::Metadata.new
+
+          cb_name = File.basename(cookbook)
+          md.name(cb_name)
+          md.from_file("#{cookbook}/metadata.rb")
+          cbs[cb_name] = md.version
+        end
       end
 
       return cbs
