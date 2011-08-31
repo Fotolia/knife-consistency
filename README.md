@@ -4,8 +4,10 @@ Knife consistency plugin
 This plugin is used to check consistency of versions in chef.
 
 It has 2 modes :
-**latest** : checks the latest version of a cookbook against a given environment
-**local** : checks if your local cookbooks are at the latest version (useful when working in a team)
+
+- **latest** : checks the latest version of a cookbook against a given environment
+
+- **local** : checks if your local cookbooks are at the latest version (useful when working in a team)
 
 almost a screenshot :
 <pre>
@@ -22,6 +24,6 @@ cookbook "resolvconf" has no local candidate version
 cookbook "activemq" is not up to date. latest is 0.0.2, local version is 0.0.1
 </pre>
 
-License : WTFPL
+License : WTFPL</br>
 Author : Nicolas Szalay < nico |at| rottenbytes |meh| info >
 
