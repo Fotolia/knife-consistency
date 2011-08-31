@@ -3,7 +3,7 @@ require 'chef/knife'
 module Fotolia
   class Consistency < Chef::Knife
 
-    banner "knife consistency [latest|local] [ENVIRONMENT]"
+    banner "knife consistency [latest ENVIRONMENT|local]"
 
     deps do
       require 'chef/knife/search'
@@ -13,7 +13,7 @@ module Fotolia
 
     def run
       if name_args.count < 1 then
-        ui.error "Usage : knife consistency [latest|local] [ENVIRONMENT if latest]"
+        ui.error "Usage : knife consistency [latest ENVIRONMENT|local]"
         exit 1
       end
 
@@ -91,13 +91,21 @@ module Fotolia
         Chef::Config.from_file(File.join(ENV['HOME'], '.chef', 'knife.rb'))
       end
 
-      Dir.glob("#{Chef::Config.cookbook_path}/*").each do |cookbook|
-        md = Chef::Cookbook::Metadata.new
+      if Chef::Config.cookbook_path.is_a?(String)
+        config_cookbook_path = [ Chef::Config.cookbook_path ]
+      else
+        config_cookbook_path = Chef::Config.cookbook_path
+      end
 
-        cb_name = File.basename(cookbook)
-        md.name(cb_name)
-        md.from_file("#{cookbook}/metadata.rb")
-        cbs[cb_name] = md.version
+      config_cookbook_path.each do |cookbook_path|
+        Dir.glob("#{cookbook_path}/*").each do |cookbook|
+          md = Chef::Cookbook::Metadata.new
+
+          cb_name = File.basename(cookbook)
+          md.name(cb_name)
+          md.from_file("#{cookbook}/metadata.rb")
+          cbs[cb_name] = md.version
+        end
       end
 
       return cbs
