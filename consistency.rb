@@ -38,24 +38,23 @@ module Fotolia
               next
             end
 
-            if target_versions[name] < cb_version then
+            if target_versions[name] != cb_version then
               puts "cookbook \"#{name}\" is not up to date. latest is #{cb_version}, #{@environment} has version #{target_versions[name]}"
             end
 
           end
 
-
         when "local"
           local_versions = get_local_versions()
           latest_versions = get_latest_versions()
-          
+
           latest_versions.each_pair do |name, cb_version|
             unless local_versions.has_key?(name)
               puts "cookbook \"#{name}\" has no local candidate version"
               next
             end
 
-            if local_versions[name] < cb_version then
+            if local_versions[name] != cb_version then
               puts "cookbook \"#{name}\" is not up to date. latest is #{cb_version}, local version is #{local_versions[name]}"
             end
 
